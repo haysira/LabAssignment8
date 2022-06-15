@@ -31,14 +31,15 @@ function connectDB() {
 
 
 
-    function runQuery($query, $param_type, $param_value_array) {
-        $sql = $this->pdo->prepare($query);
-				$this->bindQueryParams($sql, $param_type, $param_value_array);
+  function runQuery($query, $param_type, $param_value_array) {
+
+        $sql = $this->conn->prepare($query);
+        $this->bindQueryParams($sql, $param_type, $param_value_array);
         $sql->execute();
         $result = $sql->fetchAll();
 				$sql->setFetchMode(PDO::FETCH_ASSOC);
         if (count($result) > 0) {
-            foreach ( $row as $result) {
+            foreach ($result as $row) {
                 $resultset[] = $row;
             }
         }
@@ -46,8 +47,7 @@ function connectDB() {
         if(!empty($resultset)) {
             return $resultset;
         }
-
- }
+    }
 
 
 
